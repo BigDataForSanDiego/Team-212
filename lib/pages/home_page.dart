@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'dart:io';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,6 +40,14 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _wordsSpoken = "${result.recognizedWords}";
     });
+    _saveTranscription(_wordsSpoken);
+  }
+
+  Future<void> _saveTranscription(String transcription) async {
+    final directory = 'Users/adamrolander/Desktop';
+    final filePath = '$directory/transcription.txt';
+    final file = File(filePath);
+    await file.writeAsString(transcription);
   }
 
   @override
@@ -46,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[200],
-        title: Text(
+        title: const Text(
           'Automated Appointment Transcription',
           style: TextStyle(
             color: Colors.black,
