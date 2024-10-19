@@ -32,6 +32,8 @@
 	<string>Permission required to record audio</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Permission required to record audio</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Permission to use your location is required.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

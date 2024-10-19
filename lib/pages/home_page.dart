@@ -27,16 +27,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startListening() async {
-    await _speechToText.listen(onResult: _onSpeechResult);
-    setState(() {});
+    if (_speechEnabled) {
+      print("Listening started");
+      await _speechToText.listen(onResult: _onSpeechResult);
+      setState(() {});
+    } else {
+      print("Speech recognition not initialized");
+    }
   }
 
   void _stopListening() async {
+    print("start of stop listening");
     await _speechToText.stop();
     setState(() {});
   }
 
   void _onSpeechResult(result) {
+    print("On Speech result");
+    print("Recognized words: ${result.recognizedWords}");
     setState(() {
       _wordsSpoken = "${result.recognizedWords}";
     });
@@ -93,7 +101,14 @@ class _HomePageState extends State<HomePage> {
             ),
             // Button at the bottom
             ElevatedButton(
-              onPressed: _speechToText.isListening ? _stopListening : _startListening,
+              onPressed: () {
+                print(_speechToText.isListening);
+                if (_speechToText.isListening) {
+                  _stopListening();
+                } else {
+                  _startListening();
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueGrey[200], // Button background color
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20), // Button padding
@@ -103,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 _speechToText.isListening ? 'Stop Recording' : 'Push to Begin Recording',
               ),
             ),
-            SizedBox(height: 100,)
+            SizedBox(height: 100),
           ],
         ),
       ),
