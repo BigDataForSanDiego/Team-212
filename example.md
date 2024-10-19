@@ -58,5 +58,6 @@
 - Schedule for follow-up visit after tests are completed or sooner if symptoms escalate.
 
 **Physician's Name:** Dr. Singh
+
 **Signature:** _______________________  
 **Date:** 10/18/2024
